@@ -157,8 +157,8 @@ Menampilkan source code bot yang dipakai`)
                   buttons: buttons,
                   headerType: 1
               }
-              
-              await client.sendMessage('6282134580805@s.whatsapp.net', {buttonsMessage: buttonMessage}, {})
+              //send button
+              client.sendMessage(from, buttonMessage, MessageType.buttonsMessage)
           break;
         default: {
           if (isCmd2 && budy.toLowerCase() != undefined) {
