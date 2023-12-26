@@ -5,6 +5,7 @@ const util = require("util");
 const chalk = require("chalk");
 const OpenAI = require("openai");
 let setting = require("./key.json");
+const axios = require("axios");
 const openai = new OpenAI({ apiKey: setting.keyopenai });
 
 module.exports = sansekai = async (client, m, chatUpdate) => {
@@ -147,6 +148,18 @@ Menampilkan source code bot yang dipakai`)
             const [number, ...pesan] = args;
             client.sendMessage(number + "@s.whatsapp.net", pesan.join(" "));
             break;
+        case "id":
+          //menerima 4 digit id 
+          //contoh id 8989
+          if (!text) return reply(`Kirim pesan ke nomor pendaftar dengan id 4 digit.\n\nContoh:\n${prefix}${command} 8989`);
+          const urlget = await axios.get(`https://bodyget.nodeproject.my.id/notifyuser/${text}`);
+          const data = urlget.data.code;
+          if (data == 200) {return reply("Berhasil mengirim pesan ke nomor pendaftar") 
+          } else {
+              return reply("id tidak ditemukan");
+          }
+          break;
+
         case "button":
           let buttons = [
             { buttonId: 'url', buttonText: { displayText: 'Klik Disini' }, type: 1, url: 'https://www.example.com' }
