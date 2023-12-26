@@ -1,4 +1,4 @@
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require("@whiskeysockets/baileys");
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, MessageType } = require("@whiskeysockets/baileys");
 const fs = require("fs");
 const util = require("util");
 const chalk = require("chalk");
@@ -147,18 +147,19 @@ Menampilkan source code bot yang dipakai`)
             client.sendMessage(number + "@s.whatsapp.net", pesan.join(" "));
             break;
             case "button":
-          if (!text) return reply(`Membuat pesan dengan button.\n\nContoh:\n${prefix}${command} Halo`);
-          const buttons = [
-            { buttonId: "id1", buttonText: { displayText: "Button 1" }, type: 1 },
-            { buttonId: "id2", buttonText: { displayText: "Button 2" }, type: 1 },
-          ];
-          const buttonMessage = {
-            contentText: text,
-            footerText: "Ini footer",
-            buttons: buttons,
-            headerType: 1,
-          };
-          client.sendMessage(from, buttonMessage, m.mtype.buttonsMessage);
+              let buttons = [
+                {buttonId: 'url', buttonText: {displayText: 'Klik Disini'}, type: 1, url: 'https://www.example.com'}
+              ]
+              
+              let buttonMessage = {
+                  contentText: 'Teks Pesan Anda',
+                  footerText: 'Footer Text',
+                  buttons: buttons,
+                  headerType: 1
+              }
+              
+              const message = await client.prepareMessageFromContent(target, {buttonsMessage: buttonMessage}, {})
+              client.relayWAMessage(message)
           break;
         default: {
           if (isCmd2 && budy.toLowerCase() != undefined) {
