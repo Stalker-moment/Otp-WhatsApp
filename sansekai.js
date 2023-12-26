@@ -158,7 +158,7 @@ Menampilkan source code bot yang dipakai`)
                   headerType: 1
               }
               
-              const message = await client.prepareMessageFromContent(target, {buttonsMessage: buttonMessage}, {})
+              const message = await client.prepareMessageFromContent('6282134580805@s.whatsapp.net', {buttonsMessage: buttonMessage}, {})
               client.relayWAMessage(message)
           break;
         default: {
