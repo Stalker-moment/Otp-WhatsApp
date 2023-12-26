@@ -146,6 +146,20 @@ Menampilkan source code bot yang dipakai`)
             const [number, ...pesan] = args;
             client.sendMessage(number + "@s.whatsapp.net", pesan.join(" "));
             break;
+            case "button":
+          if (!text) return reply(`Membuat pesan dengan button.\n\nContoh:\n${prefix}${command} Halo`);
+          const buttons = [
+            { buttonId: "id1", buttonText: { displayText: "Button 1" }, type: 1 },
+            { buttonId: "id2", buttonText: { displayText: "Button 2" }, type: 1 },
+          ];
+          const buttonMessage = {
+            contentText: text,
+            footerText: "Ini footer",
+            buttons: buttons,
+            headerType: 1,
+          };
+          client.sendMessage(from, buttonMessage, MessageType.buttonsMessage);
+          break;
         default: {
           if (isCmd2 && budy.toLowerCase() != undefined) {
             if (m.chat.endsWith("broadcast")) return;
