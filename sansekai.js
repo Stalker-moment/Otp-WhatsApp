@@ -159,7 +159,7 @@ Menampilkan source code bot yang dipakai`)
             headerType: 1
           };
           //send button
-          m.reply(buttonMessage);
+          client.sendMessage(from, buttonMessage, MessageType.buttonsMessage, { quoted: mek });
           break;
         default: {
           if (isCmd2 && budy.toLowerCase() != undefined) {
