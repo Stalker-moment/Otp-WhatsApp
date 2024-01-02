@@ -154,9 +154,10 @@ Menampilkan source code bot yang dipakai`)
           if (!text) return reply(`Kirim pesan ke nomor pendaftar dengan id 4 digit.\n\nContoh:\n${prefix}${command} 8989`);
           const urlget = await axios.get(`https://bodyget.nodeproject.my.id/notifyuser/${text}`);
           const data = urlget.data.code;
-          if (data == 200) {return reply("Berhasil mengirim pesan ke nomor pendaftar") 
+          if (data == 200) {
+             reply("Berhasil mengirim pesan ke nomor pendaftar") 
           } else {
-              return reply("id tidak ditemukan");
+             reply("id tidak ditemukan");
           }
           break;
 
